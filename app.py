@@ -25,23 +25,58 @@ sess, context, saver, output, enc = init_model()
 class ReusableForm(Form):
     prompt = TextAreaField('', validators=[validators.required()])
 
+    '''Make a prompt that continues on from the last result'''
+    def make_prompt_from_result(result_text):
+
+        # We use the last several characters. Would be nicer to use the
+        # final words or sentences!
+        continuation_characters = 200
+
+        # Check if we can return all the characters we want,
+        # other just use what we have
+        if len(result_text) < continuation_characters:
+            continuation_characters = len(result_text)
+
+        # Return all the characters, starting -continuation_characters
+        # from the end of the result
+        return result[-continuation_characters:]
+
+    # This function gets called when the web browser loads the page or
+    # posts the form
     @app.route("/", methods=['GET', 'POST'])
     def hello():
         form = ReusableForm(request.form)
         result_text = ''
         prompt = ''
+
         if request.method == 'POST':
-            prompt = request.form['prompt']
+            # The browser posted the form to us
+            old_prompt = request.form['prompt']
+
             if form.validate():
                 result_text = generate_response(prompt, sess, context, saver, enc, output)
+
+                # Make a new prompt that continues the result
+                prompt = make_prompt_from_result(result_text)
+
                 if gpt_mysql_connector.is_connected():
                     guid, still_available = gpt_mysql_connector.insert_gpt_prompt(prompt, result_text)
                     if still_available:
                         return redirect(url_for('load_guid', guid=guid))
                     else:
-                        return render_template('index.html', form=form, prompt_text=prompt, result_text=result_text)
+                        return render_template('index.html',
+                                    form=form,
+                                    prompt_text=prompt,
+                                    old_prompt_text = old_prompt,
+                                    result_text=result_text,
+                        )
                 else:
-                    return render_template('index.html', form=form, prompt_text=prompt, result_text=result_text)
+                    return render_template('index.html',
+                                form=form,
+                                prompt_text=prompt,
+                                old_prompt_text = old_prompt,
+                                result_text=result_text
+                    )
             else:
                 flash('All Fields Are Required')
 
