@@ -8,11 +8,11 @@ import tensorflow as tf
 
 import model, sample, encoder
 
-def init_model(model_name='345M',seed=None,nsamples=1,batch_size=1,length=None,temperature=1,top_k=40,models_dir='models'):
+def init_model(model_name='355M',seed=None,nsamples=1,batch_size=1,length=None,temperature=1,top_k=40,models_dir='models'):
     #region Explanation
     """
     Interactively run the model
-    :model_name=345 : String, which model to use
+    :model_name=355 : String, which model to use
     :seed=None : Integer seed for random number generators, fix seed to reproduce
      results
     :nsamples=1 : Number of samples to return total
@@ -28,7 +28,7 @@ def init_model(model_name='345M',seed=None,nsamples=1,batch_size=1,length=None,t
      while 40 means 40 words are considered at each step. 0 (default) is a
      special setting meaning no restrictions. 40 generally is a good value.
      :models_dir : path to parent folder containing model subfolders
-     (i.e. contains the <model_name> folder)     
+     (i.e. contains the <model_name> folder)
     """
     #endregion
 
@@ -47,7 +47,7 @@ def init_model(model_name='345M',seed=None,nsamples=1,batch_size=1,length=None,t
     elif length > hparams.n_ctx:
         raise ValueError("Can't get samples longer than window size: %s" % hparams.n_ctx)
 
-    sess = tf.compat.v1.Session() 
+    sess = tf.compat.v1.Session()
     with sess.as_default():
         context = tf.compat.v1.placeholder(tf.int32, [batch_size, None])
         np.random.seed(seed)
@@ -57,7 +57,7 @@ def init_model(model_name='345M',seed=None,nsamples=1,batch_size=1,length=None,t
             context=context,
             batch_size=batch_size,
             temperature=temperature, top_k=top_k
-        )   
+        )
         saver = tf.compat.v1.train.Saver()
         ckpt = tf.train.latest_checkpoint(os.path.join(models_dir, model_name))
         saver.restore(sess, ckpt)
@@ -68,7 +68,7 @@ def generate_response(prompt_text, sess, context, saver, enc, output ):
     context_tokens = enc.encode(prompt_text)
     generated = 0
     full_text = ''
-    
+
     with sess.as_default():
         nsamples = 1
         batch_size = 1
@@ -82,19 +82,19 @@ def generate_response(prompt_text, sess, context, saver, enc, output ):
                 full_text += text
                 full_text = "<br />". join(full_text.split("\n"))
                 full_text = full_text.split('<|endoftext|>', 1)[0]
-        return full_text    
+        return full_text
 
 
 def interact_model(
-    model_name='345M',
+    model_name='355M',
     seed=None,
     nsamples=1,
     batch_size=1,
     length=None,
     temperature=1,
     top_k=40,
-    models_dir='models',  
-    prompt_parameter='test'  
+    models_dir='models',
+    prompt_parameter='test'
 ):
     """
     Interactively run the model
@@ -114,7 +114,7 @@ def interact_model(
      while 40 means 40 words are considered at each step. 0 (default) is a
      special setting meaning no restrictions. 40 generally is a good value.
      :models_dir : path to parent folder containing model subfolders
-     (i.e. contains the <model_name> folder)     
+     (i.e. contains the <model_name> folder)
     """
     models_dir = os.path.expanduser(os.path.expandvars(models_dir))
     if batch_size is None:
