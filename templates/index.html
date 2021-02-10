@@ -34,13 +34,13 @@
         <section id="HeroBanner">
             <div class="hero-content">
                 <h1>Welcome to the world of GPT-2</h1>
-                <h2 style="color:#FFFFFF">rev 0.04 - Now with highlighted prompts!</h2>
                 <p style="color:#FFFFFF">Enter a writing prompt in the field below</p>
+                <p style="color:#FFFFFF">The last part of the result from GPT2 will become the new prompt, so you can continue the story</p>
                 <form method="POST" action="/">
                     <div stype="width: 50%">
                         <label autocomplete="off" for="prompt"></label>
                         <textarea autocomplete="off" id="prompt" name="prompt" required>{{prompt_text}}</textarea>
-                        <input type="submit" value="Let the magic happen">
+                        <input type="submit" value="Continue the story">
                     </div>
                     {% autoescape false %}
                         <pre style ="font-style: italic;color:rgb(148, 148, 148);size:12px;">{{old_prompt_text}}</pre>
