@@ -7,7 +7,16 @@ import gpt_mysql_connector
 
 
 DEBUG = True
+NGROK = True
+
+
 app = Flask(__name__)
+
+if NGROK:
+   # We'll run the server with ngrok tunneling
+   from flask_ngrok import run_with_ngrok
+   run_with_ngrok(app)
+
 app.config.from_object(Config)
 
 sess, context, saver, output, enc = init_model()
