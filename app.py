@@ -27,6 +27,9 @@ class ReusableForm(Form):
 
     '''Make a prompt that continues on from the last result'''
     def make_prompt_from_result(result_text):
+        return result_text
+
+        # XXX
 
         # We use the last several characters. Would be nicer to use the
         # final words or sentences!
