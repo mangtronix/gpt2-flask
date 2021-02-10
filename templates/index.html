@@ -38,12 +38,12 @@
                 <p style="color:#FFFFFF">Enter a writing prompt in the field below</p>
                 <form method="POST" action="/">
                     <div stype="width: 50%">
-                        {{ form.prompt.label(autocomplete="off") }}
-                        {{ form.prompt(autocomplete="off") }}
+                        <label autocomplete="off" for="prompt"></label>
+                        <textarea autocomplete="off" id="prompt" name="prompt" required>{{prompt_text}}</textarea>
                         <input type="submit" value="Let the magic happen">
                     </div>
                     {% autoescape false %}
-                        <pre style ="font-style: italic;color:rgb(148, 148, 148);size:12px;">{{prompt_text}}</pre>
+                        <pre style ="font-style: italic;color:rgb(148, 148, 148);size:12px;">{{old_prompt_text}}</pre>
                         <pre style="color:#FFFFFF;size:12px;">{{result_text}}</pre>
                     {% endautoescape %}
                 </form>

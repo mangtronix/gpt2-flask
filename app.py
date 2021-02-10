@@ -30,6 +30,7 @@ class ReusableForm(Form):
         form = ReusableForm(request.form)
         result_text = ''
         prompt = ''
+        new_prompt = ''
         if request.method == 'POST':
             prompt = request.form['prompt']
 
@@ -48,9 +49,9 @@ class ReusableForm(Form):
                     if still_available:
                         return redirect(url_for('load_guid', guid=guid))
                     else:
-                        return render_template('index.html', form=form, prompt_text=prompt, result_text=result_text)
+                        return render_template('index.html', form=form, prompt_text = new_prompt, old_prompt_text=prompt, result_text=result_text)
                 else:
-                    return render_template('index.html', form=form, prompt_text=prompt, result_text=result_text)
+                    return render_template('index.html', form=form, prompt_text = new_prompt, old_prompt_text=prompt, result_text=result_text)
             else:
                 flash('All Fields Are Required')
 
