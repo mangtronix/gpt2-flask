@@ -59,8 +59,8 @@ ul, li {
 
 /* Sets the size of the prompt entry */
 #prompt {
-	width: 50em;
-	height: 10em;
+	width: 60em;
+	height: 30em;
 }
 
 /* Put the submit below the prompt */
