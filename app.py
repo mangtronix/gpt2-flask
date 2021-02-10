@@ -23,8 +23,8 @@ sess, context, saver, output, enc = init_model()
 
 
 class ReusableForm(Form):
-    prompt = TextField('', validators=[validators.required()])
-    
+    prompt = TextAreaField('', validators=[validators.required()])
+
     @app.route("/", methods=['GET', 'POST'])
     def hello():
         form = ReusableForm(request.form)

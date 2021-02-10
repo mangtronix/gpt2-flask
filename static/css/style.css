@@ -56,6 +56,18 @@ ul, li {
 	line-height: 1.5;
 	margin: 0 0 15px;
 }
+
+/* Sets the size of the prompt entry */
+#prompt {
+	width: 50em;
+	height: 10em;
+}
+
+/* Put the submit below the prompt */
+input[type="submit"] {
+	display: block;
+}
+
 /* utility classes*/
 .primary-btn {
 	font-size: 18px;
@@ -268,7 +280,7 @@ ul, li {
 #HeroBanner .hero-content {
 	display: table-cell;
 	background-color: rgba(10,40,60,0.7);
-	text-align: center;
+	/* text-align: center; */
 	vertical-align: middle;
 	padding: 0 15px;
 }
@@ -633,6 +645,3 @@ ul, li {
 #Footer .social-share ul li a:hover .fa-instagram {
 	color: #fb3958;
 }
-
-
-
