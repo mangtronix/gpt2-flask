@@ -1,3 +1,17 @@
+# GPT-2 running as a webapp on Colab
+
+Access this Colab to run the code in this repository:
+
+[4g GPT-2 webapp on Colab](https://colab.research.google.com/drive/1uX7xByZyav8u4yqdd6G1Ih2oiu71Sx4B?usp=sharing)
+
+
+<br/>
+<br/>
+
+---
+
+# ORIGINAL INSTRUCTIONS
+
 # gpt2-flask
 Nonsense Flask App for GPT-2 Phrase Generator
 
