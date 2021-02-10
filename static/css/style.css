@@ -63,6 +63,12 @@ ul, li {
 	height: 30em;
 }
 
+/* Make our pre elements wrap text */
+pre {
+	white-space: pre-wrap;
+	word-wrap: break-word;
+}
+
 /* Put the submit below the prompt */
 input[type="submit"] {
 	display: block;
