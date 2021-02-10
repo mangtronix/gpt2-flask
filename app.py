@@ -39,10 +39,9 @@ class ReusableForm(Form):
 
                 # Use the last characters of the result (GPT output) for the new prompt
                 # inside the entry form
-                continuation_characters = 100
+                continuation_characters = 500
                 new_prompt = result_text[-continuation_characters:]
                 print("New prompt: %s" % new_prompt)
-                form['prompt'] = new_prompt
 
                 if gpt_mysql_connector.is_connected():
                     guid, still_available = gpt_mysql_connector.insert_gpt_prompt(prompt, result_text)
