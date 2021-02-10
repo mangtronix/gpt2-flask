@@ -80,7 +80,7 @@ def generate_response(prompt_text, sess, context, saver, enc, output ):
                 generated += 1
                 text = enc.decode(out[i])
                 full_text += text
-                full_text = "<br />". join(full_text.split("\n"))
+                # full_text = "<br />". join(full_text.split("\n"))
                 full_text = full_text.split('<|endoftext|>', 1)[0]
         return full_text
 
